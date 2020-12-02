@@ -1,13 +1,16 @@
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Alerts from '../components/layout/Alerts';
+import { loginStart } from '../redux/auth/authActions';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = ({ email, password }) => {
+    dispatch(loginStart({ email, password }));
   };
 
   return (
