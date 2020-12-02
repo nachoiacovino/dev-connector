@@ -24,7 +24,7 @@ router.get('/me', authMiddleware, async (req, res) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send({ msg: 'Server error' });
   }
 });
 
@@ -87,7 +87,7 @@ router.post(
       return res.json(profile);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      res.status(500).send({ msg: 'Server error' });
     }
   },
 );
@@ -101,7 +101,7 @@ router.get('/', async (req, res) => {
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send({ msg: 'Server error' });
   }
 });
 
@@ -123,7 +123,7 @@ router.get('/user/:user_id', async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Profile not found' });
     }
-    return res.status(500).send('Server error');
+    return res.status(500).send({ msg: 'Server error' });
   }
 });
 
@@ -138,7 +138,7 @@ router.delete('/', authMiddleware, async (req, res) => {
     res.status(204);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send({ msg: 'Server error' });
   }
 });
 
@@ -193,7 +193,7 @@ router.put(
       res.json(profile);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      res.status(500).send({ msg: 'Server error' });
     }
   },
 );
@@ -213,7 +213,7 @@ router.delete('/experience/:exp_id', authMiddleware, async (req, res) => {
     res.status(200).json(profile);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send({ msg: 'Server error' });
   }
 });
 
@@ -269,7 +269,7 @@ router.put(
       res.json(profile);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      res.status(500).send({ msg: 'Server error' });
     }
   },
 );
@@ -289,7 +289,7 @@ router.delete('/education/:edu_id', authMiddleware, async (req, res) => {
     res.status(200).json(profile);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send({ msg: 'Server error' });
   }
 });
 
