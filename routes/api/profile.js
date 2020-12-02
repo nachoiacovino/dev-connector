@@ -135,7 +135,7 @@ router.delete('/', authMiddleware, async (req, res) => {
     // @todo - Remove users posts
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
-    res.status(204);
+    res.sendStatus(204);
   } catch (err) {
     console.error(err.message);
     res.status(500).send({ msg: 'Server error' });
