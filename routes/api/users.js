@@ -30,7 +30,7 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
 
       if (user) {
         return res
@@ -58,7 +58,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 3600 },
+        { expiresIn: 3600000 },
         (err, token) => {
           if (err) console.error(err);
           res.json({ token });
