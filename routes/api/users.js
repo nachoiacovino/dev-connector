@@ -5,6 +5,7 @@ const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const normalize = require('normalize-url');
 
 const router = express.Router();
 
@@ -38,11 +39,14 @@ router.post(
           .json({ errors: [{ msg: 'User already exists' }] });
       }
 
-      const avatar = gravatar.url(email, {
-        s: '200',
-        r: 'pg',
-        d: 'mm',
-      });
+      const avatar = normalize(
+        gravatar.url(email, {
+          s: '200',
+          r: 'pg',
+          d: 'mm',
+        }),
+        { forceHttps: true },
+      );
 
       user = new User({ name, email, avatar, password });
 
@@ -58,7 +62,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 3600000 },
+        { expiresIn: '5 days' },
         (err, token) => {
           if (err) console.error(err);
           res.json({ token });
