@@ -4,19 +4,20 @@ import { Link } from 'react-router-dom';
 
 import Alerts from '../components/layout/Alerts';
 import { setAlert } from '../redux/alerts/alertsActions';
+import { registerStart } from '../redux/auth/authActions';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    if (data.password !== data.confirmPassword) {
+  const onSubmit = ({ name, email, password, confirmPassword }) => {
+    if (password !== confirmPassword) {
       dispatch(
         setAlert({ msg: 'Passwords do not match', alertType: 'danger' }),
       );
+    } else {
+      dispatch(registerStart({ name, email, password }));
     }
-
-    console.log(data);
   };
 
   return (

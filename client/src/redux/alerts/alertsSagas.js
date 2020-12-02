@@ -3,7 +3,7 @@ import { all, call, delay, put, takeLatest } from 'redux-saga/effects';
 import { DELETE_ALERT, SET_ALERT } from './alertsTypes';
 
 export function* setAlertTimeout({ payload }) {
-  yield delay(2000);
+  yield delay(5000);
   yield put({ type: DELETE_ALERT, payload: payload.id });
 }
 
