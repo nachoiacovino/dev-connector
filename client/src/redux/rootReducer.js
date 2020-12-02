@@ -3,11 +3,13 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import { alerts } from './alerts/alertsReducer';
+import { auth } from './auth/authReducer';
 
 const persistConfig = { key: 'root', storage, whitelist: [''] };
 
 const rootReducer = combineReducers({
   alerts,
+  auth,
 });
 
 export default persistReducer(persistConfig, rootReducer);
