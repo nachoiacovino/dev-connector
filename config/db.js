@@ -1,9 +1,9 @@
-import config from 'config';
-import mongoose from 'mongoose';
+const config = require('config');
+const mongoose = require('mongoose');
 
 const db = config.get('mongoURI');
 
-export const connectDb = async () => {
+const connectDb = async () => {
   try {
     await mongoose.connect(db, {
       useNewUrlParser: true,
@@ -15,3 +15,5 @@ export const connectDb = async () => {
     proccess.exit(1);
   }
 };
+
+module.exports = connectDb;
