@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import Alerts from '../components/layout/Alerts';
+
 const Login = () => {
   const { register, handleSubmit } = useForm();
 
@@ -10,6 +12,7 @@ const Login = () => {
 
   return (
     <section className='container'>
+      <Alerts />
       {/* <div className='alert alert-danger'>Invalid credentials</div> */}
       <h1 className='large text-primary'>Login</h1>
       <p className='lead'>

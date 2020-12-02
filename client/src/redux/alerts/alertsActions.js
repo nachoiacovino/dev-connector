@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-import { REMOVE_ALERT, SET_ALERT } from './alertTypes';
+import { DELETE_ALERT, SET_ALERT } from './alertsTypes';
 
 export const setAlert = (payload) => ({
   type: SET_ALERT,
@@ -8,6 +8,6 @@ export const setAlert = (payload) => ({
 });
 
 export const removeAlert = (payload) => ({
-  type: REMOVE_ALERT,
+  type: DELETE_ALERT,
   payload,
 });

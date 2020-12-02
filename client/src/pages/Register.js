@@ -2,7 +2,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setAlert } from '../redux/alert/alertActions';
+import Alerts from '../components/layout/Alerts';
+import { setAlert } from '../redux/alerts/alertsActions';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -13,7 +14,6 @@ const Register = () => {
       dispatch(
         setAlert({ msg: 'Passwords do not match', alertType: 'danger' }),
       );
-      console.log('Passwords do not match');
     }
 
     console.log(data);
@@ -21,6 +21,7 @@ const Register = () => {
 
   return (
     <section className='container'>
+      <Alerts />
       <h1 className='large text-primary'>Register</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Create Your Account
