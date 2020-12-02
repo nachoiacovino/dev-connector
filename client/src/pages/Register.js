@@ -1,11 +1,20 @@
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { setAlert } from '../redux/alert/alertActions';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (data.password !== data.confirmPassword) alert('Passwords do not match');
+    if (data.password !== data.confirmPassword) {
+      dispatch(
+        setAlert({ msg: 'Passwords do not match', alertType: 'danger' }),
+      );
+      console.log('Passwords do not match');
+    }
 
     console.log(data);
   };
