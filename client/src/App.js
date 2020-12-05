@@ -7,6 +7,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import ProfileForm from './pages/ProfileForm';
 import Register from './pages/Register';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
+        <PrivateRoute exact path='/create-profile' component={ProfileForm} />
       </Switch>
     </>
   );
