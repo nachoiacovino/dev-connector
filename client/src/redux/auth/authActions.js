@@ -10,7 +10,6 @@ export const loginStart = (payload) => ({
   payload,
 });
 
-export const logoutStart = (payload) => ({
+export const logoutStart = () => ({
   type: LOGOUT_START,
-  payload,
 });

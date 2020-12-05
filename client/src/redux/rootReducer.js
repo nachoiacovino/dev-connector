@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import { alerts } from './alerts/alertsReducer';
 import { auth } from './auth/authReducer';
 
-const persistConfig = { key: 'root', storage, whitelist: [''] };
+const persistConfig = { key: 'root', storage, whitelist: ['auth'] };
 
 const rootReducer = combineReducers({
   alerts,

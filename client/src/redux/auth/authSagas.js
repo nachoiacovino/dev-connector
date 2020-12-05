@@ -6,7 +6,9 @@ import {
   LOGIN_FAILED,
   LOGIN_START,
   LOGIN_SUCCESS,
+  LOGOUT_FAILED,
   LOGOUT_START,
+  LOGOUT_SUCCESS,
   REGISTER_FAILED,
   REGISTER_START,
   REGISTER_SUCCESS,
@@ -15,7 +17,8 @@ import {
 
 export function* loadUser(token) {
   try {
-    const res = yield api.get('/auth', { headers: { 'x-auth-token': token } });
+    yield (api.defaults.headers.common['x-auth-token'] = token);
+    const res = yield api.get('/auth');
 
     yield put({
       type: SET_TOKEN,
@@ -99,7 +102,20 @@ export function* onRegisterSuccess() {
   yield takeLatest(REGISTER_SUCCESS, registerSuccess);
 }
 
-export function* logout({ payload }) {}
+export function* logout() {
+  yield delete api.defaults.headers.common['x-auth-token'];
+
+  try {
+    yield put({
+      type: LOGOUT_SUCCESS,
+    });
+  } catch (err) {
+    yield put({
+      type: LOGOUT_FAILED,
+      payload: err,
+    });
+  }
+}
 
 export function* onLogoutStart() {
   yield takeLatest(LOGOUT_START, logout);
