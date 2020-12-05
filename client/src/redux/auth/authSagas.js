@@ -3,13 +3,13 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import api from '../../utils/api';
 import { setAlert } from '../alerts/alertsActions';
 import {
-  LOGIN_FAILED,
+  LOGIN_FAIL,
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGOUT_FAILED,
+  LOGOUT_FAIL,
   LOGOUT_START,
   LOGOUT_SUCCESS,
-  REGISTER_FAILED,
+  REGISTER_FAIL,
   REGISTER_START,
   REGISTER_SUCCESS,
   SET_TOKEN,
@@ -31,7 +31,7 @@ export function* loadUser(token) {
     });
   } catch (err) {
     yield put({
-      type: LOGIN_FAILED,
+      type: LOGIN_FAIL,
       payload: err,
     });
   }
@@ -57,7 +57,7 @@ export function* register({ payload }) {
     }
 
     yield put({
-      type: REGISTER_FAILED,
+      type: REGISTER_FAIL,
     });
   }
 }
@@ -84,7 +84,7 @@ export function* login({ payload }) {
     }
 
     yield put({
-      type: LOGIN_FAILED,
+      type: LOGIN_FAIL,
       payload: err,
     });
   }
@@ -111,7 +111,7 @@ export function* logout() {
     });
   } catch (err) {
     yield put({
-      type: LOGOUT_FAILED,
+      type: LOGOUT_FAIL,
       payload: err,
     });
   }

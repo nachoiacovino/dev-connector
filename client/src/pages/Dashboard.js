@@ -1,4 +1,13 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { getProfileStart } from '../redux/profile/profileActions';
+
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(getProfileStart()), [dispatch]);
+
   return (
     <section className='container'>
       <h1 className='large text-primary'>Dashboard</h1>
