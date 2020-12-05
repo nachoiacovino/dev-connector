@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 
 import Alerts from '../components/layout/Alerts';
 import { setAlert } from '../redux/alerts/alertsActions';
@@ -8,6 +8,8 @@ import { registerStart } from '../redux/auth/authActions';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const user = useSelector(({ auth }) => auth.user);
+
   const dispatch = useDispatch();
 
   const onSubmit = ({ name, email, password, confirmPassword }) => {
@@ -19,6 +21,8 @@ const Register = () => {
       dispatch(registerStart({ name, email, password }));
     }
   };
+
+  if (user) return <Redirect to='/dashboard' />;
 
   return (
     <section className='container'>

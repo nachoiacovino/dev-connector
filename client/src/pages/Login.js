@@ -1,17 +1,21 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 
 import Alerts from '../components/layout/Alerts';
 import { loginStart } from '../redux/auth/authActions';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const user = useSelector(({ auth }) => auth.user);
+
   const { register, handleSubmit } = useForm();
 
   const onSubmit = ({ email, password }) => {
     dispatch(loginStart({ email, password }));
   };
+
+  if (user) return <Redirect to='/dashboard' />;
 
   return (
     <section className='container'>
