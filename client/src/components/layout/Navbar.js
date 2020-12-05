@@ -9,6 +9,32 @@ const Navbar = () => {
 
   const logout = () => dispatch(logoutStart());
 
+  const authLinks = (
+    <>
+      <li>
+        <i className='fas fa-user' />
+        <Link to='/dasboard'>Dashboard</Link>
+      </li>
+      <li>
+        <i className='fas fa-sign-out-alt' />
+        <a onClick={logout} href='#!'>
+          Logout
+        </a>
+      </li>
+    </>
+  );
+
+  const guestLinks = (
+    <>
+      <li>
+        <Link to='/register'>Register</Link>
+      </li>
+      <li>
+        <Link to='/login'>Login</Link>
+      </li>
+    </>
+  );
+
   return (
     <nav className='navbar bg-dark'>
       <h1>
@@ -17,25 +43,10 @@ const Navbar = () => {
         </Link>
       </h1>
       <ul>
-        <li>
+        {/*         <li>
           <a href='profiles.html'>Developers</a>
-        </li>
-        {user ? (
-          <li>
-            <a onClick={logout} href='#!'>
-              Logout
-            </a>
-          </li>
-        ) : (
-          <>
-            <li>
-              <Link to='/register'>Register</Link>
-            </li>
-            <li>
-              <Link to='/login'>Login</Link>
-            </li>
-          </>
-        )}
+        </li> */}
+        {user ? authLinks : guestLinks}
       </ul>
     </nav>
   );

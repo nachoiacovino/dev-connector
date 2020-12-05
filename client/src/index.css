@@ -319,10 +319,14 @@ button {
 .navbar a {
   color: #fff;
   padding: 0.45rem;
-  margin: 0 0.25rem;
+  margin-right: 0.4rem;
 }
 
-.navbar a:hover {
+.navbar li:hover a {
+  color: var(--primary-color);
+}
+
+.navbar li:hover i {
   color: var(--primary-color);
 }
 
