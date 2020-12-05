@@ -10,7 +10,29 @@ import {
   REGISTER_FAILED,
   REGISTER_START,
   REGISTER_SUCCESS,
+  SET_TOKEN,
 } from './authTypes';
+
+export function* loadUser(token) {
+  try {
+    const res = yield api.get('/auth', { headers: { 'x-auth-token': token } });
+
+    yield put({
+      type: SET_TOKEN,
+      payload: token,
+    });
+
+    yield put({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOGIN_FAILED,
+      payload: err,
+    });
+  }
+}
 
 export function* register({ payload }) {
   try {
@@ -18,9 +40,8 @@ export function* register({ payload }) {
 
     yield put({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: res.data.token,
     });
-    /* yield (loadUser()); */
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -47,12 +68,7 @@ export function* login({ payload }) {
   try {
     const res = yield api.post('/auth', payload);
 
-    yield put({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
-    });
-
-    /*     put(loadUser()); */
+    yield loadUser(res.data.token);
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -66,12 +82,21 @@ export function* login({ payload }) {
 
     yield put({
       type: LOGIN_FAILED,
+      payload: err,
     });
   }
 }
 
 export function* onLoginStart() {
   yield takeLatest(LOGIN_START, login);
+}
+
+export function* registerSuccess({ payload }) {
+  yield loadUser(payload);
+}
+
+export function* onRegisterSuccess() {
+  yield takeLatest(REGISTER_SUCCESS, registerSuccess);
 }
 
 export function* logout({ payload }) {}
@@ -81,5 +106,10 @@ export function* onLogoutStart() {
 }
 
 export default function* authSagas() {
-  yield all([call(onRegisterStart), call(onLoginStart), call(onLogoutStart)]);
+  yield all([
+    call(onRegisterStart),
+    call(onLoginStart),
+    call(onRegisterSuccess),
+    call(onLogoutStart),
+  ]);
 }

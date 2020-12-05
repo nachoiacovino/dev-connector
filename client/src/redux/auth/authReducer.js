@@ -1,4 +1,4 @@
-import { REGISTER_FAILED, REGISTER_SUCCESS } from './authTypes';
+import { LOGIN_FAILED, LOGIN_SUCCESS, REGISTER_FAILED, SET_TOKEN } from './authTypes';
 
 const initialState = {
   token: null,
@@ -9,7 +9,8 @@ const initialState = {
 
 export const auth = (state = initialState, { type, payload }) => {
   switch (type) {
-    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      console.log(payload);
       return {
         ...state,
         user: payload,
@@ -17,9 +18,17 @@ export const auth = (state = initialState, { type, payload }) => {
         error: null,
       };
     case REGISTER_FAILED:
+    case LOGIN_FAILED:
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case SET_TOKEN:
+      return {
+        ...state,
+        token: payload,
+        error: null,
         loading: false,
       };
     default:
