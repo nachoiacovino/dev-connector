@@ -2,6 +2,7 @@ import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, 
 
 const initialState = {
   user: null,
+  token: null,
   loading: true,
   error: null,
 };
@@ -19,6 +20,7 @@ export const auth = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: null,
+        token: null,
         loading: false,
         error: null,
       };

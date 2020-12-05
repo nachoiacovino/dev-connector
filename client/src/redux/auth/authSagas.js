@@ -17,13 +17,12 @@ import {
 
 export function* loadUser(token) {
   try {
-    yield (api.defaults.headers.common['x-auth-token'] = token);
-    const res = yield api.get('/auth');
-
     yield put({
       type: SET_TOKEN,
       payload: token,
     });
+
+    const res = yield api.get('/auth');
 
     yield put({
       type: LOGIN_SUCCESS,
@@ -67,7 +66,6 @@ export function* onRegisterStart() {
 }
 
 export function* login({ payload }) {
-  console.log(payload);
   try {
     const res = yield api.post('/auth', payload);
 
@@ -103,8 +101,6 @@ export function* onRegisterSuccess() {
 }
 
 export function* logout() {
-  yield delete api.defaults.headers.common['x-auth-token'];
-
   try {
     yield put({
       type: LOGOUT_SUCCESS,
