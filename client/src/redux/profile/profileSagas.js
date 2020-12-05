@@ -2,10 +2,10 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import api from '../../utils/api';
 import { setAlert } from '../alerts/alertsActions';
-import { GET_PROFILE_FAIL, GET_PROFILE_START, GET_PROFILE_SUCCESS } from './profileTypes';
+import { LOGOUT_SUCCESS } from '../auth/authTypes';
+import { CLEAR_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_START, GET_PROFILE_SUCCESS } from './profileTypes';
 
-export function* getProfile({ payload }) {
-  console.log(payload);
+export function* getProfile() {
   try {
     const res = yield api.get('/profile/me');
 
@@ -32,6 +32,14 @@ export function* onGetProfileStart() {
   yield takeLatest(GET_PROFILE_START, getProfile);
 }
 
-export default function* authSagas() {
-  yield all([call(onGetProfileStart)]);
+export function* clearProfile() {
+  yield put({ type: CLEAR_PROFILE });
+}
+
+export function* onLogoutSuccess() {
+  yield takeLatest(LOGOUT_SUCCESS, clearProfile);
+}
+
+export default function* profileSagas() {
+  yield all([call(onGetProfileStart), call(onLogoutSuccess)]);
 }
