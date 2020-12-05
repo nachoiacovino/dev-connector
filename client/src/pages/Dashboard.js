@@ -1,12 +1,30 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+import Spinner from '../components/layout/Spinner';
 import { getProfileStart } from '../redux/profile/profileActions';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const loading = useSelector(({ profile }) => profile.loading);
+  const profile = useSelector(({ profile }) => profile.userProfile);
 
   useEffect(() => dispatch(getProfileStart()), [dispatch]);
+
+  if (loading) return <Spinner />;
+
+  if (profile?.type === 'no-profile')
+    return (
+      <section className='container'>
+        <div>
+          <p>You have yet to create your profile! Please add some info</p>
+          <Link to='/create-profile' className='btn btn-primary my-1'>
+            Create Profile
+          </Link>
+        </div>
+      </section>
+    );
 
   return (
     <section className='container'>

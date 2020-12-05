@@ -11,7 +11,12 @@ const initialState = {
 export const profile = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_PROFILE_SUCCESS:
-      return { ...state, userProfile: payload };
+      return {
+        ...state,
+        userProfile: payload,
+        error: false,
+        loading: false,
+      };
     case GET_PROFILE_FAIL:
       return {
         ...state,
@@ -22,7 +27,7 @@ export const profile = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userProfile: null,
-        error: null,
+        error: false,
         loading: false,
       };
     default:
