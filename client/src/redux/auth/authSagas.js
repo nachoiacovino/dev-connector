@@ -61,10 +61,6 @@ export function* register({ payload }) {
   }
 }
 
-export function* onRegisterStart() {
-  yield takeLatest(REGISTER_START, register);
-}
-
 export function* login({ payload }) {
   try {
     const res = yield call(api.post, '/auth', payload);
@@ -88,16 +84,8 @@ export function* login({ payload }) {
   }
 }
 
-export function* onLoginStart() {
-  yield takeLatest(LOGIN_START, login);
-}
-
 export function* registerSuccess({ payload }) {
   yield call(loadUser, payload);
-}
-
-export function* onRegisterSuccess() {
-  yield takeLatest(REGISTER_SUCCESS, registerSuccess);
 }
 
 export function* logout() {
@@ -113,15 +101,9 @@ export function* logout() {
   }
 }
 
-export function* onLogoutStart() {
-  yield takeLatest(LOGOUT_START, logout);
-}
-
 export default function* authSagas() {
-  yield all([
-    call(onRegisterStart),
-    call(onLoginStart),
-    call(onRegisterSuccess),
-    call(onLogoutStart),
-  ]);
+  yield takeLatest(REGISTER_START, register);
+  yield takeLatest(LOGIN_START, login);
+  yield takeLatest(REGISTER_SUCCESS, registerSuccess);
+  yield takeLatest(LOGOUT_START, logout);
 }

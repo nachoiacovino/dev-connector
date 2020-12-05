@@ -36,10 +36,6 @@ export function* getProfile() {
   }
 }
 
-export function* onGetProfileStart() {
-  yield takeLatest(GET_PROFILE_START, getProfile);
-}
-
 export function* updateProfile({ payload }) {
   try {
     yield call(api.post, '/profile', payload);
@@ -63,22 +59,12 @@ export function* updateProfile({ payload }) {
   }
 }
 
-export function* onUpdateProfileStart() {
-  yield takeLatest(UPDATE_PROFILE_START, updateProfile);
-}
-
 export function* clearProfile() {
   yield put({ type: CLEAR_PROFILE });
 }
 
-export function* onLogoutSuccess() {
-  yield takeLatest(LOGOUT_SUCCESS, clearProfile);
-}
-
 export default function* profileSagas() {
-  yield all([
-    call(onGetProfileStart),
-    call(onLogoutSuccess),
-    call(onUpdateProfileStart),
-  ]);
+  yield takeLatest(UPDATE_PROFILE_START, updateProfile);
+  yield takeLatest(LOGOUT_SUCCESS, clearProfile);
+  yield takeLatest(GET_PROFILE_START, getProfile);
 }
