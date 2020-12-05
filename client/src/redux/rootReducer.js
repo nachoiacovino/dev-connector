@@ -6,7 +6,7 @@ import { alerts } from './alerts/alertsReducer';
 import { auth } from './auth/authReducer';
 import { profile } from './profile/profileReducer';
 
-const persistConfig = { key: 'root', storage, whitelist: ['auth'] };
+const persistConfig = { key: 'root', storage, whitelist: ['auth', 'profile'] };
 
 const rootReducer = combineReducers({
   alerts,

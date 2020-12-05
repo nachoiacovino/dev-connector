@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,14 +6,34 @@ import { Link } from 'react-router-dom';
 import { updateProfileStart } from '../redux/profile/profileActions';
 
 const ProfileForm = () => {
-  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const profile = useSelector(({ profile }) => profile.userProfile);
+  const { register, handleSubmit, reset } = useForm();
+
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const onSubmit = (data) => {
     dispatch(updateProfileStart(data));
   };
+
+  useEffect(() => {
+    if (!profile.type) {
+      reset({
+        company: profile.company,
+        website: profile.website,
+        location: profile.location,
+        status: profile.status,
+        skills: profile.skills.toString(),
+        githubusername: profile.githubusername,
+        bio: profile.bio,
+        twitter: profile.social.twitter,
+        facebook: profile.social.facebook,
+        linkedin: profile.social.linkedin,
+        youtube: profile.social.youtube,
+        instagram: profile.social.instagram,
+      });
+    }
+  }, [profile, reset]);
 
   return (
     <section className='container'>
