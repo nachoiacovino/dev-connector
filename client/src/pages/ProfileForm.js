@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { updateProfileStart } from '../redux/profile/profileActions';
@@ -8,6 +8,7 @@ import { updateProfileStart } from '../redux/profile/profileActions';
 const ProfileForm = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const profile = useSelector(({ profile }) => profile.userProfile);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const onSubmit = (data) => {
@@ -23,7 +24,7 @@ const ProfileForm = () => {
       <small>* = required field</small>
       <form className='form' onSubmit={handleSubmit(onSubmit)}>
         <div className='form-group'>
-          <select name='status' ref={register}>
+          <select name='status' ref={register({ required: true })}>
             <option>* Select Professional Status</option>
             <option value='Developer'>Developer</option>
             <option value='Junior Developer'>Junior Developer</option>
@@ -76,7 +77,7 @@ const ProfileForm = () => {
             type='text'
             placeholder='* Skills'
             name='skills'
-            ref={register}
+            ref={register({ required: true })}
           />
           <small className='form-text'>
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
