@@ -1,4 +1,4 @@
-import { CLEAR_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_SUCCESS } from './profileTypes';
+import { CLEAR_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL } from './profileTypes';
 
 const initialState = {
   userProfile: null,
@@ -18,6 +18,7 @@ export const profile = (state = initialState, { type, payload }) => {
         loading: false,
       };
     case GET_PROFILE_FAIL:
+    case UPDATE_PROFILE_FAIL:
       return {
         ...state,
         error: payload,

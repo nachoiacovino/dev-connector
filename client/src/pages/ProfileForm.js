@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { updateProfileStart } from '../redux/profile/profileActions';
 
 const ProfileForm = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(updateProfileStart(data));
   };
 
   return (
