@@ -22,7 +22,7 @@ export function* loadUser(token) {
       payload: token,
     });
 
-    const res = yield api.get('/auth');
+    const res = yield call(api.get, '/auth');
 
     yield put({
       type: LOGIN_SUCCESS,
@@ -38,7 +38,7 @@ export function* loadUser(token) {
 
 export function* register({ payload }) {
   try {
-    const res = yield api.post('/users', payload);
+    const res = yield call(api.post, '/users', payload);
 
     yield put({
       type: REGISTER_SUCCESS,
@@ -67,9 +67,9 @@ export function* onRegisterStart() {
 
 export function* login({ payload }) {
   try {
-    const res = yield api.post('/auth', payload);
+    const res = yield call(api.post, '/auth', payload);
 
-    yield loadUser(res.data.token);
+    yield call(loadUser, res.data.token);
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -93,7 +93,7 @@ export function* onLoginStart() {
 }
 
 export function* registerSuccess({ payload }) {
-  yield loadUser(payload);
+  yield call(loadUser, payload);
 }
 
 export function* onRegisterSuccess() {

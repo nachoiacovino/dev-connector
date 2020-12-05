@@ -15,7 +15,7 @@ import {
 
 export function* getProfile() {
   try {
-    const res = yield api.get('/profile/me');
+    const res = yield call(api.get, '/profile/me');
 
     yield put({ type: GET_PROFILE_SUCCESS, payload: res.data });
   } catch (err) {
@@ -42,7 +42,7 @@ export function* onGetProfileStart() {
 
 export function* updateProfile({ payload }) {
   try {
-    /* const res = */ yield api.post('/profile', payload);
+    yield call(api.post, '/profile', payload);
 
     yield put({ type: UPDATE_PROFILE_SUCCESS });
   } catch (err) {
