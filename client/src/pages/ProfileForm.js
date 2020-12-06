@@ -17,9 +17,12 @@ const ProfileForm = () => {
 
   const onSubmit = (data) => {
     dispatch(updateProfileStart(data));
-
     if (!editMode) history.push('/dashboard');
   };
+
+  useEffect(() => {
+    if (!profile.type && !editMode) history.push('/dashboard');
+  }, []);
 
   useEffect(() => {
     if (editMode) {
