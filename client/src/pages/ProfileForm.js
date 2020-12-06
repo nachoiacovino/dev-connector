@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { updateProfileStart } from '../redux/profile/profileActions';
 
 const ProfileForm = () => {
+  const location = useLocation();
+  const history = useHistory();
+  const editMode = location.pathname === '/edit-profile';
   const dispatch = useDispatch();
   const profile = useSelector(({ profile }) => profile.userProfile);
   const { register, handleSubmit, reset } = useForm();
@@ -14,10 +17,12 @@ const ProfileForm = () => {
 
   const onSubmit = (data) => {
     dispatch(updateProfileStart(data));
+
+    if (!editMode) history.push('/dashboard');
   };
 
   useEffect(() => {
-    if (!profile.type) {
+    if (editMode) {
       reset({
         company: profile.company,
         website: profile.website,
@@ -33,11 +38,13 @@ const ProfileForm = () => {
         instagram: profile.social.instagram,
       });
     }
-  }, [profile, reset]);
+  }, [profile, reset, editMode]);
 
   return (
     <section className='container'>
-      <h1 className='large text-primary'>Edit Your Profile</h1>
+      <h1 className='large text-primary'>
+        {editMode ? 'Edit' : 'Create'} Your Profile
+      </h1>
       <p className='lead'>
         <i className='fas fa-user' /> Add some changes to your profile
       </p>

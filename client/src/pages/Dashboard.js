@@ -33,9 +33,10 @@ const Dashboard = () => {
         <i className='fas fa-user'></i> Welcome John Doe
       </p>
       <div className='dash-buttons'>
-        <a href='edit-profile.html' className='btn btn-light'>
+        <Link to='/edit-profile' className='btn btn-light'>
           <i className='fas fa-user-circle text-primary'></i> Edit Profile
-        </a>
+        </Link>
+
         <a href='add-experience.html' className='btn btn-light'>
           <i className='fab fa-black-tie text-primary'></i> Add Experience
         </a>
