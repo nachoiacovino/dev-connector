@@ -10,6 +10,8 @@ import {
   DELETE_EXPERIENCE_SUCCESS,
   GET_ALL_PROFILES_FAIL,
   GET_ALL_PROFILES_SUCCESS,
+  GET_GITHUB_REPOS_FAIL,
+  GET_GITHUB_REPOS_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -43,6 +45,13 @@ export const profile = (state = initialState, { type, payload }) => {
         error: false,
         loading: false,
       };
+    case GET_GITHUB_REPOS_SUCCESS:
+      return {
+        ...state,
+        repos: payload,
+        error: false,
+        loading: false,
+      };
     case DELETE_EXPERIENCE_SUCCESS:
       return {
         ...state,
@@ -69,6 +78,7 @@ export const profile = (state = initialState, { type, payload }) => {
       };
     case GET_PROFILE_FAIL:
     case GET_ALL_PROFILES_FAIL:
+    case GET_GITHUB_REPOS_FAIL:
     case UPDATE_PROFILE_FAIL:
     case ADD_EXPERIENCE_FAIL:
     case ADD_EDUCATION_FAIL:

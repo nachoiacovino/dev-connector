@@ -4,6 +4,8 @@ import {
   DELETE_EDUCATION_START,
   DELETE_EXPERIENCE_START,
   GET_ALL_PROFILES_START,
+  GET_GITHUB_REPOS_START,
+  GET_PROFILE_BY_ID_START,
   GET_PROFILE_START,
   UPDATE_PROFILE_START,
 } from './profileTypes';
@@ -14,6 +16,16 @@ export const getProfileStart = () => ({
 
 export const getAllProfilesStart = () => ({
   type: GET_ALL_PROFILES_START,
+});
+
+export const getProfileByIdStart = (payload) => ({
+  type: GET_PROFILE_BY_ID_START,
+  payload,
+});
+
+export const getGithubReposStart = (payload) => ({
+  type: GET_GITHUB_REPOS_START,
+  payload,
 });
 
 export const updateProfileStart = (payload) => ({
