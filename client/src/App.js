@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import ProfileForm from './pages/ProfileForm';
+import Profiles from './pages/Profiles';
 import Register from './pages/Register';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path='/' component={Landing} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/profiles' component={Profiles} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/create-profile' component={ProfileForm} />
         <PrivateRoute exact path='/edit-profile' component={ProfileForm} />

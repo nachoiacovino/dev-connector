@@ -43,9 +43,9 @@ const Navbar = () => {
         </Link>
       </h1>
       <ul>
-        {/*         <li>
-          <a href='profiles.html'>Developers</a>
-        </li> */}
+        <li>
+          <Link to='/profiles'>Developers</Link>
+        </li>
         {user ? authLinks : guestLinks}
       </ul>
     </nav>
