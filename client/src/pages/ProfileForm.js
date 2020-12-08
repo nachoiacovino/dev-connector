@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
+import Alerts from '../components/layout/Alerts';
 import { updateProfileStart } from '../redux/profile/profileActions';
 
 const ProfileForm = () => {
@@ -22,7 +23,7 @@ const ProfileForm = () => {
 
   useEffect(() => {
     if (!profile.type && !editMode) history.push('/dashboard');
-  }, []);
+  }, [editMode, history, profile.type]);
 
   useEffect(() => {
     if (editMode) {
@@ -45,6 +46,7 @@ const ProfileForm = () => {
 
   return (
     <section className='container'>
+      <Alerts />
       <h1 className='large text-primary'>
         {editMode ? 'Edit' : 'Create'} Your Profile
       </h1>
