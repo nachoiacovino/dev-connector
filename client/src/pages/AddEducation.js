@@ -5,9 +5,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { addEducationStart } from '../redux/profile/profileActions';
 
 const AddEducation = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
+  const current = watch('current', false);
 
   const onSubmit = (data) => {
     dispatch(addEducationStart(data));
@@ -60,10 +61,12 @@ const AddEducation = () => {
             Current School or Bootcamp
           </p>
         </div>
-        <div className='form-group'>
-          <h4>To Date</h4>
-          <input type='date' name='to' ref={register} />
-        </div>
+        {!current && (
+          <div className='form-group'>
+            <h4>To Date</h4>
+            <input type='date' name='to' ref={register} />
+          </div>
+        )}
         <div className='form-group'>
           <textarea
             name='description'

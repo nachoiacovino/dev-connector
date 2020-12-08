@@ -5,9 +5,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { addExperienceStart } from '../redux/profile/profileActions';
 
 const AddExperience = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
+  const current = watch('current', false);
 
   const onSubmit = (data) => {
     dispatch(addExperienceStart(data));
@@ -59,10 +60,12 @@ const AddExperience = () => {
             Current Job
           </p>
         </div>
-        <div className='form-group'>
-          <h4>To Date</h4>
-          <input type='date' name='to' ref={register} />
-        </div>
+        {!current && (
+          <div className='form-group'>
+            <h4>To Date</h4>
+            <input type='date' name='to' ref={register} />
+          </div>
+        )}
         <div className='form-group'>
           <textarea
             name='description'
