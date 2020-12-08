@@ -17,6 +17,8 @@ import {
   DELETE_EXPERIENCE_FAIL,
   DELETE_EXPERIENCE_START,
   DELETE_EXPERIENCE_SUCCESS,
+  GET_ALL_PROFILES_FAIL,
+  GET_ALL_PROFILES_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_START,
   GET_PROFILE_SUCCESS,
@@ -43,6 +45,29 @@ export function* getProfile() {
 
     yield put({
       type: GET_PROFILE_FAIL,
+      payload: err,
+    });
+  }
+}
+
+export function* getAllProfiles() {
+  try {
+    const res = yield call(api.get, '/profile');
+
+    yield put({ type: GET_ALL_PROFILES_SUCCESS, payload: res.data });
+  } catch (err) {
+    const errors = err.response?.data.errors;
+
+    if (errors) {
+      yield all(
+        errors.map((error) =>
+          put(setAlert({ msg: error.msg, alertType: 'danger' })),
+        ),
+      );
+    }
+
+    yield put({
+      type: GET_ALL_PROFILES_FAIL,
       payload: err,
     });
   }

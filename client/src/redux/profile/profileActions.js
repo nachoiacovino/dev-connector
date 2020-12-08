@@ -3,12 +3,17 @@ import {
   ADD_EXPERIENCE_START,
   DELETE_EDUCATION_START,
   DELETE_EXPERIENCE_START,
+  GET_ALL_PROFILES_START,
   GET_PROFILE_START,
   UPDATE_PROFILE_START,
 } from './profileTypes';
 
 export const getProfileStart = () => ({
   type: GET_PROFILE_START,
+});
+
+export const getAllProfilesStart = () => ({
+  type: GET_ALL_PROFILES_START,
 });
 
 export const updateProfileStart = (payload) => ({

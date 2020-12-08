@@ -8,6 +8,8 @@ import {
   DELETE_EDUCATION_SUCCESS,
   DELETE_EXPERIENCE_FAIL,
   DELETE_EXPERIENCE_SUCCESS,
+  GET_ALL_PROFILES_FAIL,
+  GET_ALL_PROFILES_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -31,6 +33,13 @@ export const profile = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userProfile: payload,
+        error: false,
+        loading: false,
+      };
+    case GET_ALL_PROFILES_SUCCESS:
+      return {
+        ...state,
+        profiles: payload,
         error: false,
         loading: false,
       };
@@ -58,8 +67,8 @@ export const profile = (state = initialState, { type, payload }) => {
         error: false,
         loading: false,
       };
-
     case GET_PROFILE_FAIL:
+    case GET_ALL_PROFILES_FAIL:
     case UPDATE_PROFILE_FAIL:
     case ADD_EXPERIENCE_FAIL:
     case ADD_EDUCATION_FAIL:
@@ -77,7 +86,6 @@ export const profile = (state = initialState, { type, payload }) => {
         error: false,
         loading: false,
       };
-
     default:
       return state;
   }
