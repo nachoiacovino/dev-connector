@@ -12,6 +12,8 @@ import {
   GET_ALL_PROFILES_SUCCESS,
   GET_GITHUB_REPOS_FAIL,
   GET_GITHUB_REPOS_SUCCESS,
+  GET_PROFILE_BY_ID_FAIL,
+  GET_PROFILE_BY_ID_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -20,6 +22,7 @@ import {
 
 const initialState = {
   userProfile: null,
+  currentProfile: null,
   profiles: [],
   repos: [],
   loading: true,
@@ -42,6 +45,13 @@ export const profile = (state = initialState, { type, payload }) => {
       return {
         ...state,
         profiles: payload,
+        error: false,
+        loading: false,
+      };
+    case GET_PROFILE_BY_ID_SUCCESS:
+      return {
+        ...state,
+        currentProfile: payload,
         error: false,
         loading: false,
       };
@@ -78,6 +88,7 @@ export const profile = (state = initialState, { type, payload }) => {
       };
     case GET_PROFILE_FAIL:
     case GET_ALL_PROFILES_FAIL:
+    case GET_PROFILE_BY_ID_FAIL:
     case GET_GITHUB_REPOS_FAIL:
     case UPDATE_PROFILE_FAIL:
     case ADD_EXPERIENCE_FAIL:

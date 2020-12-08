@@ -23,6 +23,9 @@ import {
   GET_GITHUB_REPOS_FAIL,
   GET_GITHUB_REPOS_START,
   GET_GITHUB_REPOS_SUCCESS,
+  GET_PROFILE_BY_ID_FAIL,
+  GET_PROFILE_BY_ID_START,
+  GET_PROFILE_BY_ID_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_START,
   GET_PROFILE_SUCCESS,
@@ -72,6 +75,29 @@ export function* getAllProfiles() {
 
     yield put({
       type: GET_ALL_PROFILES_FAIL,
+      payload: err,
+    });
+  }
+}
+
+export function* getProfileById({ payload }) {
+  try {
+    const res = yield call(api.get, `/profile/user/${payload}`);
+
+    yield put({ type: GET_PROFILE_BY_ID_SUCCESS, payload: res.data });
+  } catch (err) {
+    const errors = err.response?.data.errors;
+
+    if (errors) {
+      yield all(
+        errors.map((error) =>
+          put(setAlert({ msg: error.msg, alertType: 'danger' })),
+        ),
+      );
+    }
+
+    yield put({
+      type: GET_PROFILE_BY_ID_FAIL,
       payload: err,
     });
   }
@@ -242,6 +268,7 @@ export default function* profileSagas() {
   yield takeLatest(LOGOUT_SUCCESS, clearProfile);
   yield takeLatest(GET_PROFILE_START, getProfile);
   yield takeLatest(GET_ALL_PROFILES_START, getAllProfiles);
+  yield takeLatest(GET_PROFILE_BY_ID_START, getProfileById);
   yield takeLatest(GET_GITHUB_REPOS_START, getGithubRepos);
   yield takeLatest(ADD_EXPERIENCE_START, addExperience);
   yield takeLatest(ADD_EDUCATION_START, addEducation);

@@ -9,6 +9,7 @@ import AddExperience from './pages/AddExperience';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import ProfileForm from './pages/ProfileForm';
 import Profiles from './pages/Profiles';
 import Register from './pages/Register';
@@ -22,6 +23,7 @@ const App = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/profiles' component={Profiles} />
+        <Route exact path='/profile/:id' component={Profile} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/create-profile' component={ProfileForm} />
         <PrivateRoute exact path='/edit-profile' component={ProfileForm} />
