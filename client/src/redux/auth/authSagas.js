@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import api from '../../utils/api';
 import { setAlert } from '../alerts/alertsActions';
+import { CLEAR_PROFILE } from '../profile/profileTypes';
 import {
   DELETE_ACCOUNT_FAIL,
   DELETE_ACCOUNT_START,
@@ -114,6 +115,7 @@ export function* deleteAccount() {
       yield call(api.delete, `/auth`);
 
       yield put({ type: DELETE_ACCOUNT_SUCCESS });
+      yield put({ type: CLEAR_PROFILE });
       yield put(
         setAlert({
           msg: 'Your account has been permanently deleted',
