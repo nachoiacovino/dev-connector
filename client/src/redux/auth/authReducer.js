@@ -1,4 +1,12 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, SET_TOKEN } from './authTypes';
+import {
+  DELETE_ACCOUNT_SUCCESS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT_FAIL,
+  LOGOUT_SUCCESS,
+  REGISTER_FAIL,
+  SET_TOKEN,
+} from './authTypes';
 
 const initialState = {
   user: null,
@@ -39,6 +47,8 @@ export const auth = (state = initialState, { type, payload }) => {
         error: null,
         loading: false,
       };
+    case DELETE_ACCOUNT_SUCCESS:
+      return { ...initialState, loading: false };
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { LOGIN_START, LOGOUT_START, REGISTER_START } from './authTypes';
+import { DELETE_ACCOUNT_START, LOGIN_START, LOGOUT_START, REGISTER_START } from './authTypes';
 
 export const registerStart = (payload) => ({
   type: REGISTER_START,
@@ -12,4 +12,9 @@ export const loginStart = (payload) => ({
 
 export const logoutStart = () => ({
   type: LOGOUT_START,
+});
+
+export const deleteAccountStart = (payload) => ({
+  type: DELETE_ACCOUNT_START,
+  payload,
 });

@@ -17,9 +17,6 @@ import {
   DELETE_EXPERIENCE_FAIL,
   DELETE_EXPERIENCE_START,
   DELETE_EXPERIENCE_SUCCESS,
-  DELETE_PROFILE_FAIL,
-  DELETE_PROFILE_START,
-  DELETE_PROFILE_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_START,
   GET_PROFILE_SUCCESS,
@@ -184,32 +181,6 @@ export function* deleteEducation({ payload }) {
   }
 }
 
-export function* deleteProfile() {
-  try {
-    yield call(api.delete, `/profile`);
-
-    yield put({ type: DELETE_PROFILE_SUCCESS });
-    yield put(
-      setAlert({ msg: 'Profile deleted successfully', alertType: 'success' }),
-    );
-  } catch (err) {
-    const errors = err.response?.data.errors;
-
-    if (errors) {
-      yield all(
-        errors.map((error) =>
-          put(setAlert({ msg: error.msg, alertType: 'danger' })),
-        ),
-      );
-    }
-
-    yield put({
-      type: DELETE_PROFILE_FAIL,
-      payload: err,
-    });
-  }
-}
-
 export function* clearProfile() {
   yield put({ type: CLEAR_PROFILE });
 }
@@ -222,5 +193,4 @@ export default function* profileSagas() {
   yield takeLatest(ADD_EDUCATION_START, addEducation);
   yield takeLatest(DELETE_EXPERIENCE_START, deleteExperience);
   yield takeLatest(DELETE_EDUCATION_START, deleteEducation);
-  yield takeLatest(DELETE_PROFILE_START, deleteProfile);
 }

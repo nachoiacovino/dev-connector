@@ -6,7 +6,8 @@ import Education from '../components/dashboard/Education';
 import Experience from '../components/dashboard/Experience';
 import Alerts from '../components/layout/Alerts';
 import Spinner from '../components/layout/Spinner';
-import { deleteProfileStart, getProfileStart } from '../redux/profile/profileActions';
+import { deleteAccountStart } from '../redux/auth/authActions';
+import { getProfileStart } from '../redux/profile/profileActions';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Dashboard = () => {
       <div className='my-2'>
         <button
           className='btn btn-danger'
-          onClick={() => dispatch(deleteProfileStart())}
+          onClick={() => dispatch(deleteAccountStart())}
         >
           <i className='fas fa-user-minus' />
           Delete my profile
