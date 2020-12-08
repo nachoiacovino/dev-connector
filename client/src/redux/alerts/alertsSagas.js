@@ -1,4 +1,4 @@
-import { all, call, delay, put, takeLatest } from 'redux-saga/effects';
+import { all, call, delay, put, takeEvery } from 'redux-saga/effects';
 
 import { DELETE_ALERT, SET_ALERT } from './alertsTypes';
 
@@ -8,7 +8,7 @@ export function* setAlertTimeout({ payload }) {
 }
 
 export function* onSetAlert() {
-  yield takeLatest(SET_ALERT, setAlertTimeout);
+  yield takeEvery(SET_ALERT, setAlertTimeout);
 }
 
 export default function* alertSagas() {
