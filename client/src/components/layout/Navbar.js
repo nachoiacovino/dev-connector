@@ -13,7 +13,7 @@ const Navbar = () => {
     <>
       <li>
         <i className='fas fa-user' />
-        <Link to='/dasboard'>Dashboard</Link>
+        <Link to='/dashboard'>Dashboard</Link>
       </li>
       <li>
         <i className='fas fa-sign-out-alt' />
