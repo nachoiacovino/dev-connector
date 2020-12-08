@@ -3,6 +3,7 @@ import {
   ADD_EXPERIENCE_START,
   DELETE_EDUCATION_START,
   DELETE_EXPERIENCE_START,
+  DELETE_PROFILE_START,
   GET_PROFILE_START,
   UPDATE_PROFILE_START,
 } from './profileTypes';
@@ -33,5 +34,10 @@ export const deleteExperienceStart = (payload) => ({
 
 export const deleteEducationStart = (payload) => ({
   type: DELETE_EDUCATION_START,
+  payload,
+});
+
+export const deleteProfileStart = (payload) => ({
+  type: DELETE_PROFILE_START,
   payload,
 });
