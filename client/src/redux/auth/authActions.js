@@ -14,7 +14,6 @@ export const logoutStart = () => ({
   type: LOGOUT_START,
 });
 
-export const deleteAccountStart = (payload) => ({
+export const deleteAccountStart = () => ({
   type: DELETE_ACCOUNT_START,
-  payload,
 });

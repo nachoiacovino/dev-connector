@@ -46,8 +46,8 @@ export function* register({ payload }) {
 
     yield put({
       type: REGISTER_SUCCESS,
-      payload: res.data.token,
     });
+    yield call(loadUser, res.data.token);
   } catch (err) {
     const errors = err.response?.data.errors;
 
@@ -86,10 +86,6 @@ export function* login({ payload }) {
       payload: err,
     });
   }
-}
-
-export function* registerSuccess({ payload }) {
-  yield call(loadUser, payload);
 }
 
 export function* logout() {
@@ -144,7 +140,6 @@ export function* deleteAccount() {
 export default function* authSagas() {
   yield takeLatest(REGISTER_START, register);
   yield takeLatest(LOGIN_START, login);
-  yield takeLatest(REGISTER_SUCCESS, registerSuccess);
   yield takeLatest(LOGOUT_START, logout);
   yield takeLatest(DELETE_ACCOUNT_START, deleteAccount);
 }
