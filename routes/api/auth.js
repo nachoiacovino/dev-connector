@@ -6,6 +6,7 @@ const { body, validationResult } = require('express-validator');
 const authMiddleware = require('../../middleware/auth');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
+const Post = require('../../models/Post');
 
 const router = express.Router();
 
@@ -74,7 +75,7 @@ router.post(
 // @access   Private
 router.delete('/', authMiddleware, async (req, res) => {
   try {
-    // @todo - Remove users posts
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     res.sendStatus(204);
