@@ -4,10 +4,12 @@ import { deleteEducationStart } from '../../redux/profile/profileActions';
 import formatDate from '../../utils/formatDate';
 
 const Education = () => {
-  const education = useSelector(({ profile }) => profile.userProfile.education);
+  const education = useSelector(
+    ({ profile }) => profile.userProfile?.education,
+  );
   const dispatch = useDispatch();
 
-  const educations = education.map((edu) => (
+  const educations = education?.map((edu) => (
     <tr key={edu._id}>
       <td>{edu.school}</td>
       <td className='hide-sm'>{edu.degree}</td>

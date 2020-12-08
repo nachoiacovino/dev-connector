@@ -5,7 +5,9 @@ import {
   ADD_EXPERIENCE_SUCCESS,
   CLEAR_PROFILE,
   DELETE_EDUCATION_FAIL,
+  DELETE_EDUCATION_SUCCESS,
   DELETE_EXPERIENCE_FAIL,
+  DELETE_EXPERIENCE_SUCCESS,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -32,6 +34,30 @@ export const profile = (state = initialState, { type, payload }) => {
         error: false,
         loading: false,
       };
+    case DELETE_EXPERIENCE_SUCCESS:
+      return {
+        ...state,
+        userProfile: {
+          ...state.userProfile,
+          experience: state.userProfile.experience.filter(
+            (xp) => xp._id !== payload,
+          ),
+        },
+        error: false,
+        loading: false,
+      };
+    case DELETE_EDUCATION_SUCCESS:
+      return {
+        ...state,
+        userProfile: {
+          ...state.userProfile,
+          education: state.userProfile.education.filter(
+            (edu) => edu._id !== payload,
+          ),
+        },
+        error: false,
+        loading: false,
+      };
     case GET_PROFILE_FAIL:
     case UPDATE_PROFILE_FAIL:
     case ADD_EXPERIENCE_FAIL:
@@ -50,6 +76,7 @@ export const profile = (state = initialState, { type, payload }) => {
         error: false,
         loading: false,
       };
+
     default:
       return state;
   }

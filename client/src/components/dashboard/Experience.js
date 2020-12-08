@@ -5,20 +5,20 @@ import formatDate from '../../utils/formatDate';
 
 const Experience = () => {
   const experience = useSelector(
-    ({ profile }) => profile.userProfile.experience,
+    ({ profile }) => profile.userProfile?.experience,
   );
   const dispatch = useDispatch();
 
-  const experiences = experience.map((exp) => (
-    <tr key={exp._id}>
-      <td>{exp.company}</td>
-      <td className='hide-sm'>{exp.title}</td>
+  const experiences = experience?.map((xp) => (
+    <tr key={xp._id}>
+      <td>{xp.company}</td>
+      <td className='hide-sm'>{xp.title}</td>
       <td>
-        {formatDate(exp.from)} - {exp.to ? formatDate(exp.to) : 'Now'}
+        {formatDate(xp.from)} - {xp.to ? formatDate(xp.to) : 'Now'}
       </td>
       <td>
         <button
-          onClick={() => dispatch(deleteExperienceStart(exp._id))}
+          onClick={() => dispatch(deleteExperienceStart(xp._id))}
           className='btn btn-danger'
         >
           Delete

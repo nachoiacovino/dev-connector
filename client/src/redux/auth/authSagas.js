@@ -45,7 +45,7 @@ export function* register({ payload }) {
       payload: res.data.token,
     });
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -67,7 +67,7 @@ export function* login({ payload }) {
 
     yield call(loadUser, res.data.token);
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(

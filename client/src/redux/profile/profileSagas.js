@@ -31,7 +31,7 @@ export function* getProfile() {
 
     yield put({ type: GET_PROFILE_SUCCESS, payload: res.data });
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -57,7 +57,7 @@ export function* updateProfile({ payload }) {
       setAlert({ msg: 'Profile updated successfully', alertType: 'success' }),
     );
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -83,7 +83,7 @@ export function* addExperience({ payload }) {
       setAlert({ msg: 'Experience added successfully', alertType: 'success' }),
     );
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -109,7 +109,7 @@ export function* addEducation({ payload }) {
       setAlert({ msg: 'Education added successfully', alertType: 'success' }),
     );
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -130,7 +130,7 @@ export function* deleteExperience({ payload }) {
   try {
     yield call(api.delete, `/profile/experience/${payload}`);
 
-    yield put({ type: DELETE_EXPERIENCE_SUCCESS });
+    yield put({ type: DELETE_EXPERIENCE_SUCCESS, payload });
     yield put(
       setAlert({
         msg: 'Experience deleted successfully',
@@ -138,7 +138,7 @@ export function* deleteExperience({ payload }) {
       }),
     );
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
@@ -159,12 +159,12 @@ export function* deleteEducation({ payload }) {
   try {
     yield call(api.delete, `/profile/education/${payload}`);
 
-    yield put({ type: DELETE_EDUCATION_SUCCESS });
+    yield put({ type: DELETE_EDUCATION_SUCCESS, payload });
     yield put(
       setAlert({ msg: 'Education deleted successfully', alertType: 'success' }),
     );
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data.errors;
 
     if (errors) {
       yield all(
