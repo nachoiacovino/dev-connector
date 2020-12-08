@@ -4,6 +4,8 @@ import {
   ADD_EXPERIENCE_FAIL,
   ADD_EXPERIENCE_SUCCESS,
   CLEAR_PROFILE,
+  DELETE_EDUCATION_FAIL,
+  DELETE_EXPERIENCE_FAIL,
   GET_PROFILE_FAIL,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -34,6 +36,8 @@ export const profile = (state = initialState, { type, payload }) => {
     case UPDATE_PROFILE_FAIL:
     case ADD_EXPERIENCE_FAIL:
     case ADD_EDUCATION_FAIL:
+    case DELETE_EXPERIENCE_FAIL:
+    case DELETE_EDUCATION_FAIL:
       return {
         ...state,
         error: payload,
