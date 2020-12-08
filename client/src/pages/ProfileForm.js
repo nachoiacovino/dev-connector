@@ -22,11 +22,11 @@ const ProfileForm = () => {
   };
 
   useEffect(() => {
-    if (!profile.type && !editMode) history.push('/dashboard');
-  }, [editMode, history, profile.type]);
+    if (!profile?.type && !editMode) history.push('/dashboard');
+  }, [editMode, history, profile?.type]);
 
   useEffect(() => {
-    if (editMode) {
+    if (editMode && profile) {
       reset({
         company: profile.company,
         website: profile.website,
