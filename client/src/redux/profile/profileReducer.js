@@ -1,4 +1,14 @@
-import { CLEAR_PROFILE, GET_PROFILE_FAIL, GET_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL } from './profileTypes';
+import {
+  ADD_EDUCATION_FAIL,
+  ADD_EDUCATION_SUCCESS,
+  ADD_EXPERIENCE_FAIL,
+  ADD_EXPERIENCE_SUCCESS,
+  CLEAR_PROFILE,
+  GET_PROFILE_FAIL,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_SUCCESS,
+} from './profileTypes';
 
 const initialState = {
   userProfile: null,
@@ -11,6 +21,9 @@ const initialState = {
 export const profile = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_PROFILE_SUCCESS:
+    case UPDATE_PROFILE_SUCCESS:
+    case ADD_EXPERIENCE_SUCCESS:
+    case ADD_EDUCATION_SUCCESS:
       return {
         ...state,
         userProfile: payload,
@@ -19,6 +32,8 @@ export const profile = (state = initialState, { type, payload }) => {
       };
     case GET_PROFILE_FAIL:
     case UPDATE_PROFILE_FAIL:
+    case ADD_EXPERIENCE_FAIL:
+    case ADD_EDUCATION_FAIL:
       return {
         ...state,
         error: payload,

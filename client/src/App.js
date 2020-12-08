@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layout/Navbar';
 import PrivateRoute from './components/routing/PrivateRoute';
+import AddEducation from './pages/AddEducation';
+import AddExperience from './pages/AddExperience';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -21,6 +23,8 @@ const App = () => {
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/create-profile' component={ProfileForm} />
         <PrivateRoute exact path='/edit-profile' component={ProfileForm} />
+        <PrivateRoute exact path='/add-experience' component={AddExperience} />
+        <PrivateRoute exact path='/add-education' component={AddEducation} />
       </Switch>
     </>
   );
