@@ -6,7 +6,7 @@ import { GET_ALL_POSTS_FAIL, GET_ALL_POSTS_START, GET_ALL_POSTS_SUCCESS } from '
 
 export function* getAllPosts() {
   try {
-    const res = yield call(api.get, '/profile');
+    const res = yield call(api.get, '/posts');
 
     yield put({ type: GET_ALL_POSTS_SUCCESS, payload: res.data });
   } catch (err) {
