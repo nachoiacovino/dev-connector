@@ -11,6 +11,7 @@ import {
   GET_ALL_POSTS_SUCCESS,
   GET_POST_FAIL,
   GET_POST_SUCCESS,
+  UPDATE_LIKES,
 } from './postsTypes';
 
 const initialState = {
@@ -49,6 +50,14 @@ export const posts = (state = initialState, { type, payload }) => {
         posts: state.posts.filter((post) => post._id !== payload),
         loading: false,
         error: null,
+      };
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === payload.id ? { ...post, likes: payload.likes } : post,
+        ),
+        loading: false,
       };
     case GET_POST_FAIL:
     case GET_ALL_POSTS_FAIL:

@@ -8,7 +8,6 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_LIKE_FAIL,
   ADD_LIKE_START,
-  ADD_LIKE_SUCCESS,
   ADD_POST_FAIL,
   ADD_POST_START,
   ADD_POST_SUCCESS,
@@ -17,7 +16,6 @@ import {
   DELETE_COMMENT_SUCCESS,
   DELETE_LIKE_FAIL,
   DELETE_LIKE_START,
-  DELETE_LIKE_SUCCESS,
   DELETE_POST_FAIL,
   DELETE_POST_START,
   DELETE_POST_SUCCESS,
@@ -27,6 +25,7 @@ import {
   GET_POST_FAIL,
   GET_POST_START,
   GET_POST_SUCCESS,
+  UPDATE_LIKES,
 } from './postsTypes';
 
 export function* getPost({ payload }) {
@@ -125,7 +124,10 @@ export function* addLike({ payload }) {
   try {
     const res = yield call(api.put, `/posts/like/${payload}`);
 
-    yield put({ type: ADD_LIKE_SUCCESS, payload: res.data });
+    yield put({
+      type: UPDATE_LIKES,
+      payload: { id: payload, likes: res.data },
+    });
   } catch (err) {
     const errors = err.response?.data.errors;
 
@@ -148,7 +150,10 @@ export function* deleteLike({ payload }) {
   try {
     const res = yield call(api.delete, `/posts/like/${payload}`);
 
-    yield put({ type: DELETE_LIKE_SUCCESS, payload: res.data });
+    yield put({
+      type: UPDATE_LIKES,
+      payload: { id: payload, likes: res.data },
+    });
   } catch (err) {
     const errors = err.response?.data.errors;
 
