@@ -100,9 +100,9 @@ export function* addPost({ payload }) {
 
 export function* deletePost({ payload }) {
   try {
-    const res = yield call(api.delete, `/posts/${payload}`);
+    yield call(api.delete, `/posts/${payload}`);
 
-    yield put({ type: DELETE_POST_SUCCESS, payload: res.data });
+    yield put({ type: DELETE_POST_SUCCESS, payload });
   } catch (err) {
     const errors = err.response?.data.errors;
 
@@ -192,9 +192,9 @@ export function* addComment({ payload }) {
 
 export function* deleteComment({ payload }) {
   try {
-    const res = yield call(api.delete, `/posts/comment/${payload}`);
+    yield call(api.delete, `/posts/comment/${payload}`);
 
-    yield put({ type: DELETE_COMMENT_SUCCESS, payload: res.data });
+    yield put({ type: DELETE_COMMENT_SUCCESS, payload });
   } catch (err) {
     const errors = err.response?.data.errors;
 
