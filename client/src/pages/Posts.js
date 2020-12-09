@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import PostForm from '../components/posts/PostForm';
 import PostItem from '../components/posts/PostItem';
 import { getAllPostsStart } from '../redux/posts/postsActions';
 
@@ -18,7 +19,7 @@ const Posts = () => {
       <p className='lead'>
         <i className='fas fa-user' /> Welcome to the community
       </p>
-      {/* <PostForm /> */}
+      <PostForm />
       <div className='posts'>
         {posts.map((post) => (
           <PostItem key={post._id} post={post} showActions />

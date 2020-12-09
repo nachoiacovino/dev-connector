@@ -39,7 +39,7 @@ export const posts = (state = initialState, { type, payload }) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        posts: [...state.posts, payload],
+        posts: [payload, ...state.posts],
         loading: false,
         error: null,
       };
