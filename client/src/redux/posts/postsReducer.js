@@ -1,9 +1,11 @@
 import {
   ADD_COMMENT_FAIL,
+  ADD_COMMENT_SUCCESS,
   ADD_LIKE_FAIL,
   ADD_POST_FAIL,
   ADD_POST_SUCCESS,
   DELETE_COMMENT_FAIL,
+  DELETE_COMMENT_SUCCESS,
   DELETE_LIKE_FAIL,
   DELETE_POST_FAIL,
   DELETE_POST_SUCCESS,
@@ -57,6 +59,23 @@ export const posts = (state = initialState, { type, payload }) => {
         posts: state.posts.map((post) =>
           post._id === payload.id ? { ...post, likes: payload.likes } : post,
         ),
+        loading: false,
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
+        loading: false,
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            (comment) => comment._id !== payload,
+          ),
+        },
         loading: false,
       };
     case GET_POST_FAIL:

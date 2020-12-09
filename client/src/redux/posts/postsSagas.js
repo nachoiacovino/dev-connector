@@ -172,9 +172,9 @@ export function* deleteLike({ payload }) {
   }
 }
 
-export function* addComment({ payload }) {
+export function* addComment({ payload: { postId, data } }) {
   try {
-    const res = yield call(api.post, `/posts/comment/${payload}`);
+    const res = yield call(api.post, `/posts/comment/${postId}`, data);
 
     yield put({ type: ADD_COMMENT_SUCCESS, payload: res.data });
   } catch (err) {
@@ -195,11 +195,11 @@ export function* addComment({ payload }) {
   }
 }
 
-export function* deleteComment({ payload }) {
+export function* deleteComment({ payload: { postId, commentId } }) {
   try {
-    yield call(api.delete, `/posts/comment/${payload}`);
+    yield call(api.delete, `/posts/comment/${postId}/${commentId}`);
 
-    yield put({ type: DELETE_COMMENT_SUCCESS, payload });
+    yield put({ type: DELETE_COMMENT_SUCCESS, payload: commentId });
   } catch (err) {
     const errors = err.response?.data.errors;
 
