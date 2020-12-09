@@ -9,6 +9,7 @@ import AddExperience from './pages/AddExperience';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Post from './pages/Post';
 import Posts from './pages/Posts';
 import Profile from './pages/Profile';
@@ -33,6 +34,7 @@ const App = () => {
         <PrivateRoute exact path='/add-education' component={AddEducation} />
         <PrivateRoute exact path='/posts' component={Posts} />
         <PrivateRoute exact path='/posts/:id' component={Post} />
+        <Route component={NotFound} />
       </Switch>
     </>
   );
