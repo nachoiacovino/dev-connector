@@ -10,7 +10,6 @@ const Posts = () => {
 
   useEffect(() => {
     dispatch(getAllPostsStart());
-    console.log(posts);
   }, [dispatch]);
 
   return (
