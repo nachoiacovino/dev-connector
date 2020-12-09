@@ -1,18 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { addLikeStart, deleteLikeStart, deletePostStart } from '../../redux/posts/postsActions';
 import formatDate from '../../utils/formatDate';
 
-/* import { addLike, removeLike, deletePost } from '../../actions/post'; */
-
 const PostItem = ({
-  addLike,
-  removeLike,
-  deletePost,
   post: { _id, text, name, avatar, user, likes, comments, date },
   showActions,
 }) => {
+  const dispatch = useDispatch();
   const auth = useSelector(({ auth }) => auth);
+
   return (
     <div className='post bg-white p-1 my-1'>
       <div>
@@ -28,7 +26,7 @@ const PostItem = ({
         {showActions && (
           <>
             <button
-              onClick={() => addLike(_id)}
+              onClick={() => dispatch(addLikeStart(_id))}
               type='button'
               className='btn btn-light'
             >
@@ -36,7 +34,7 @@ const PostItem = ({
               <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
             </button>
             <button
-              onClick={() => removeLike(_id)}
+              onClick={() => dispatch(deleteLikeStart(_id))}
               type='button'
               className='btn btn-light'
             >
@@ -50,7 +48,7 @@ const PostItem = ({
             </Link>
             {!auth.loading && user === auth.user._id && (
               <button
-                onClick={() => deletePost(_id)}
+                onClick={() => dispatch(deletePostStart(_id))}
                 type='button'
                 className='btn btn-danger'
               >
